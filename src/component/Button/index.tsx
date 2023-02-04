@@ -8,9 +8,9 @@ export type ButtonProps = StyledButtonProps &
 export const Button: React.FC<ButtonProps> = forwardRef<
 	HTMLButtonElement,
 	React.PropsWithChildren<ButtonProps>
->(({ children, size, variant, ...rest }) => {
+>(({ children, size, variant, ...rest }, ref) => {
 	return (
-		<StyledButton size={size} variant={variant} {...rest}>
+		<StyledButton ref={ref} size={size} variant={variant} {...rest}>
 			<div>{children}</div>
 		</StyledButton>
 	);

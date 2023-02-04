@@ -77,9 +77,10 @@ const variants = {
 export const Button: React.FC<ButtonProps> = forwardRef<
 	HTMLButtonElement,
 	React.PropsWithChildren<ButtonProps>
->(({ children, size, variant, ...rest }) => {
+>(({ children, size, variant, ...rest }, ref) => {
 	return (
 		<button
+			ref={ref}
 			className={clsx(baseClasses, sizes[size], variants[variant])}
 			{...rest}
 		>
