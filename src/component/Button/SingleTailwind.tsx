@@ -4,7 +4,7 @@ import { forwardRef } from 'react';
 export type ButtonProps = {
 	size: 'regular' | 'small';
 	variant: 'primary' | 'secondary' | 'subtle' | 'ghost';
-} & Omit<JSX.IntrinsicElements['button'], 'ref' | 'type'>;
+} & Omit<JSX.IntrinsicElements['button'], 'ref'>;
 
 const baseClasses = [
 	'flex',
@@ -78,8 +78,6 @@ export const Button: React.FC<ButtonProps> = forwardRef<
 	HTMLButtonElement,
 	React.PropsWithChildren<ButtonProps>
 >(({ children, size, variant, ...rest }) => {
-	let variantClasses = 'select-none justify-center flex';
-
 	return (
 		<button
 			className={clsx(baseClasses, sizes[size], variants[variant])}
@@ -89,3 +87,5 @@ export const Button: React.FC<ButtonProps> = forwardRef<
 		</button>
 	);
 });
+
+Button.displayName = 'Button';

@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { compose, layout, LayoutProps, space, SpaceProps } from 'styled-system';
 
 export type ButtonProps = StyledButtonProps &
-	Omit<JSX.IntrinsicElements['button'], 'ref' | 'type'>;
+	Omit<JSX.IntrinsicElements['button'], 'ref'>;
 
 export const Button: React.FC<ButtonProps> = forwardRef<
 	HTMLButtonElement,
@@ -15,6 +15,8 @@ export const Button: React.FC<ButtonProps> = forwardRef<
 		</StyledButton>
 	);
 });
+
+Button.displayName = 'Button';
 
 type StyledButtonProps = {
 	size: 'regular' | 'small';
