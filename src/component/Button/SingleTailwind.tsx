@@ -1,11 +1,6 @@
 import { clsx } from 'clsx';
 import { forwardRef } from 'react';
 
-export type ButtonProps = {
-	size: 'regular' | 'small';
-	variant: 'primary' | 'secondary' | 'subtle' | 'ghost';
-} & Omit<JSX.IntrinsicElements['button'], 'ref'>;
-
 const baseClasses = [
 	'flex',
 	'cursor-pointer',
@@ -73,6 +68,12 @@ const variants = {
 		'disabled:[&>div]:border-transparent',
 	],
 };
+
+export interface ButtonProps
+	extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+	size: 'regular' | 'small';
+	variant: 'primary' | 'secondary' | 'subtle' | 'ghost';
+}
 
 export const Button: React.FC<ButtonProps> = forwardRef<
 	HTMLButtonElement,

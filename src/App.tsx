@@ -12,19 +12,19 @@ function App() {
 				<h1 className='text-3xl font-bold underline'>Buttons!</h1>
 			</div>
 			<div className='mt-4 flex flex-col items-center gap-4'>
-				<Button variant='primary' size='regular'>
+				<Button size='regular' variant='primary'>
 					Label
 				</Button>
-				<Button variant='secondary' size='regular'>
+				<Button size='regular' variant='secondary'>
 					Label
 				</Button>
-				<Button variant='subtle' size='regular'>
+				<Button size='regular' variant='subtle'>
 					Label
 				</Button>
-				<Button variant='ghost' size='regular'>
+				<Button size='regular' variant='ghost'>
 					Label
 				</Button>
-				<Button variant='ghost' size='regular' disabled>
+				<Button size='regular' variant='ghost' disabled>
 					Label
 				</Button>
 			</div>

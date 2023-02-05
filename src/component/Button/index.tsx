@@ -2,8 +2,11 @@ import { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 import { compose, layout, LayoutProps, space, SpaceProps } from 'styled-system';
 
-export type ButtonProps = StyledButtonProps &
-	Omit<JSX.IntrinsicElements['button'], 'ref'>;
+export interface ButtonProps
+	extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+	size: 'regular' | 'small';
+	variant: 'primary' | 'secondary' | 'subtle' | 'ghost';
+}
 
 export const Button: React.FC<ButtonProps> = forwardRef<
 	HTMLButtonElement,
