@@ -36,6 +36,9 @@
             ],
             "@Button/*": [
                 "src/component/Button/*"
+            ],
+            "@Pages/*": [
+                "src/Pages/*"
             ]
         },
         "plugins": [

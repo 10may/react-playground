@@ -3,31 +3,130 @@ import styled, { css } from 'styled-components';
 import { compose, layout, LayoutProps, space, SpaceProps } from 'styled-system';
 
 export interface ButtonProps
-	extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-	size: 'regular' | 'small';
-	variant: 'primary' | 'secondary' | 'subtle' | 'ghost';
-}
+	extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+		Partial<StyledButtonProps> {}
+
+type StyledButtonProps = {
+	/**
+	 * The size of the button.
+	 */
+	s: 'regular' | 'small';
+
+	/**
+	 * The variant of the button.
+	 */
+	v: 'primary' | 'secondary' | 'subtle' | 'ghost';
+
+	/**
+	 * An optional array of paths to images to be used as the button's background.
+	 * The first element is the path to the default image,
+	 * the second is the path to the on hover image,
+	 * and the third is the path to the on disabled image.
+
+	 *
+	 * [
+	 *
+	 *	'path to default image',
+	 *
+	 *	'path to on hover image',
+	 *
+	 *  'path to on disabled image'
+	 *
+	 * ]
+	 */
+	src?: [string, string?, string?];
+} & SpaceProps &
+	LayoutProps;
 
 export const Button: React.FC<ButtonProps> = forwardRef<
 	HTMLButtonElement,
 	React.PropsWithChildren<ButtonProps>
->(({ children, size, variant, ...rest }, ref) => {
+>(({ children, s = 'regular', v = 'primary', src, ...rest }, ref) => {
 	return (
-		<StyledButton ref={ref} size={size} variant={variant} {...rest}>
-			<div>{children}</div>
+		<StyledButton ref={ref} s={s} v={v} src={src} {...rest}>
+			{src && <img />}
+			{children}
 		</StyledButton>
 	);
 });
 
 Button.displayName = 'Button';
 
-type StyledButtonProps = {
-	size: 'regular' | 'small';
-	variant: 'primary' | 'secondary' | 'subtle' | 'ghost';
-} & SpaceProps &
-	LayoutProps;
+const sizes = {
+	small: css`
+		font-size: 14px;
+		padding: 6px 12px;
+	`,
+	regular: css`
+		font-size: 16px;
+		padding: 8px 16px;
+	`,
+} as const;
+
+const variants = {
+	primary: css`
+		color: ${props => props.theme.colors.white};
+		outline: none;
+		background-color: ${props => props.theme.colors.primary_blue};
+
+		&:hover {
+			color: ${props => props.theme.colors.dark_primary};
+			outline: 1px solid ${props => props.theme.colors.dark_primary};
+			background-color: ${props => props.theme.colors.white};
+		}
+
+		&:active {
+			color: ${props => props.theme.colors.white};
+			background-color: ${props => props.theme.colors.dark_primary};
+		}
+	`,
+	secondary: css`
+		color: ${props => props.theme.colors.gray900};
+		outline: 1px solid ${props => props.theme.colors.gray300};
+		background-color: ${props => props.theme.colors.white};
+
+		&:hover {
+			background-color: ${props => props.theme.colors.gray100};
+		}
+
+		&:active {
+			outline: 1px solid ${props => props.theme.colors.gray500};
+		}
+	`,
+	subtle: css`
+		color: ${props => props.theme.colors.gray900};
+		outline: none;
+		background-color: ${props => props.theme.colors.subtle_blue};
+
+		&:hover {
+			outline: 1px solid ${props => props.theme.colors.primary_blue};
+		}
+
+		&:active {
+			outline: 2px solid ${props => props.theme.colors.primary_blue};
+		}
+	`,
+
+	ghost: css`
+		color: ${props => props.theme.colors.dark_primary};
+		outline: none;
+		background-color: transparent;
+
+		&:hover {
+			background-color: ${props => props.theme.colors.gray100};
+		}
+
+		&:active {
+			outline: 1px solid ${props => props.theme.colors.dark_primary};
+		}
+	`,
+} as const;
 
 export const StyledButton = styled.button<StyledButtonProps>`
+	/* all: unset; */
+	outline: none;
+	border: none;
+
 	/* layout */
 	display: flex;
 	flex-direction: row;
@@ -40,95 +139,40 @@ export const StyledButton = styled.button<StyledButtonProps>`
 	/* typography */
 	font-family: 'Lato';
 	font-style: normal;
-	font-weight: 700;
-	font-size: 14px;
+	font-weight: 600;
+	font-size: 12px;
 	line-height: 16px;
 	text-align: center;
+	letter-spacing: 0.1px;
 
 	cursor: pointer;
 	user-select: none;
 
-	${({ size }) => {
-		switch (size) {
-			case 'regular':
-				return css`
-					font-size: 16px;
-					padding: 8px 16px;
-				`;
-			case 'small':
-				return css`
-					font-size: 14px;
-					padding: 6px 12px;
-				`;
-			default:
-				return css`
-					font-size: 14px;
-					padding: 6px 12px;
-				`;
-		}
-	}};
+	${({ s }) => sizes[s]};
+	${({ v }) => variants[v]};
 
-	${({ variant, theme: { colors } }) => {
-		switch (variant) {
-			case 'primary':
-				return css`
-					color: ${colors.white};
-					outline: none;
-					background-color: ${colors.primary_blue};
+	${({ src }) => {
+		return (
+			src &&
+			css`
+				img {
+					width: 16px;
+					height: 16px;
+					display: block;
+					vertical-align: middle;
 
-					&:hover {
-						color: ${colors.dark_primary};
-						outline: 1px solid ${colors.dark_primary};
-						background-color: ${colors.white};
-					}
+					content: url(${src[0]});
+				}
 
-					&:active {
-						color: ${colors.white};
-						background-color: ${colors.dark_primary};
-					}
-				`;
-			case 'secondary':
-				return css`
-					color: ${colors.gray900};
-					outline: 1px solid ${colors.gray300};
-					background-color: ${colors.white};
+				&:hover img {
+					content: url(${src[1] || src[0]});
+				}
 
-					&:hover {
-						background-color: ${colors.gray100};
-					}
-
-					&:active {
-						outline: 1px solid ${colors.gray500};
-					}
-				`;
-			case 'subtle':
-				return css`
-					color: ${colors.gray900};
-					outline: none;
-					background-color: ${colors.subtle_blue};
-
-					&:hover {
-						outline: 1px solid ${colors.primary_blue};
-					}
-
-					&:active {
-						outline: 2px solid ${colors.primary_blue};
-					}
-				`;
-			case 'ghost':
-				return css`
-					color: ${colors.dark_primary};
-					outline: none;
-					background-color: transparent;
-
-					&:hover {
-						& > div {
-							border-bottom: 1px solid ${colors.dark_primary};
-							margin-bottom: -1px;
-						}
-					}
-				`;
-		}
+				&:disabled img {
+					content: url(${src[2] || src[0]});
+				}
+			`
+		);
 	}};
 
 	&:disabled {
@@ -136,10 +180,6 @@ export const StyledButton = styled.button<StyledButtonProps>`
 		color: ${({ theme }) => theme.colors.gray500};
 		outline: none;
 		background-color: ${({ theme }) => theme.colors.gray100};
-		& > div {
-			border-bottom: 0;
-			margin-bottom: 0;
-		}
 	}
 
 	${compose(space, layout)}
