@@ -1,12 +1,12 @@
 import { ThemeProvider } from 'styled-components';
 
-import Buttons from './Pages/Buttons';
+import { CohortTable } from './Pages/CohortTable';
 import { theme } from './theme';
 
 function App() {
 	return (
 		<ThemeProvider theme={theme}>
-			<Buttons />
+			<CohortTable />
 		</ThemeProvider>
 	);
 }
