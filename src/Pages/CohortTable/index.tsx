@@ -1,5 +1,6 @@
 import { theme } from '@/theme';
 import {
+	ColumnDef,
 	createColumnHelper,
 	flexRender,
 	getCoreRowModel,
@@ -26,9 +27,13 @@ const interpolator = piecewise(interpolateRgb, [
 	// 'hsla(206, 100%, 85%, 1)',
 	// 'hsla(206, 100%, 76%, 1)',
 
-	'rgba(251,97,48,1)',
-	'rgba(255,248,186,1)',
-	'rgba(87,181,104,1)',
+	'#EF476F',
+	'#F18805 ',
+	'#44BBA4 ',
+
+	// 'rgba(251,97,48,1)',
+	// 'rgba(255,248,186,1)',
+	// 'rgba(87,181,104,1)',
 
 	// 'red',
 	// 'yellow',
@@ -142,7 +147,12 @@ const columns = [
 	}),
 ];
 
-function getDomain(data: Cohort[]) {
+/**
+ *
+ * @param data Cohort[]
+ * @returns [min, max]
+ */
+function getDomain(data: Cohort[]): [number, number] {
 	let min = Infinity;
 	let max = -Infinity;
 
@@ -154,11 +164,27 @@ function getDomain(data: Cohort[]) {
 		});
 	});
 
-	return { min, max };
+	return [min, max];
 }
 
-export const CohortTable: React.FC = () => {
-	const { min, max } = useMemo(() => getDomain(data), [data]);
+export interface CohortTableProps<T, U = unknown> {
+	/**
+	 * table rows
+	 */
+	data: T[];
+
+	/**
+	 * table columns made using columnHelper
+	 */
+	columns: ColumnDef<T, U>[];
+}
+
+export function CohortTable<
+	T extends Record<string, unknown>,
+	U = unknown,
+>({}: React.PropsWithChildren<CohortTableProps<T, U>>) {
+	const [min, max] = useMemo(() => getDomain(data), [data]);
+
 	const table = useReactTable({
 		data: data,
 		columns,
@@ -221,7 +247,7 @@ export const CohortTable: React.FC = () => {
 			</table>
 		</TableWrapper>
 	);
-};
+}
 
 export default CohortTable;
 
@@ -262,3 +288,5 @@ function getTextColor(rgbString: string) {
 	// Use white text for dark backgrounds
 	return '#ffffff';
 }
+
+// CustomerAnalytics

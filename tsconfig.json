@@ -50,6 +50,7 @@
     "include": [
         "src",
         ".eslintrc.cjs",
+        "postcss.config.cjs",
         "vite.config.ts"
     ],
     "exclude": [
