@@ -12,7 +12,6 @@ export default defineConfig({
 		}),
 		ViteAliases({
 			useConfig: true,
-			useTypescript: true,
 		}),
 	],
 });

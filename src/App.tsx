@@ -1,12 +1,12 @@
 import { ThemeProvider } from 'styled-components';
 
-import { ShareOfVoice } from './Pages/ShareOfVoice';
+import { RowSelectionTable } from './component/Table/RowSelection';
 import { theme } from './theme';
 
 function App() {
 	return (
 		<ThemeProvider theme={theme}>
-			<ShareOfVoice />
+			<RowSelectionTable />
 		</ThemeProvider>
 	);
 }
