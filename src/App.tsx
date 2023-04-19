@@ -1,12 +1,14 @@
 import { ThemeProvider } from 'styled-components';
 
-import { RowSelectionTable } from './component/Table/RowSelection';
+import { React } from './component/svg';
 import { theme } from './theme';
 
 function App() {
 	return (
 		<ThemeProvider theme={theme}>
-			<RowSelectionTable />
+			<div className='flex h-screen justify-center'>
+				<React fill='red' />
+			</div>
 		</ThemeProvider>
 	);
 }

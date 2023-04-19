@@ -34,11 +34,20 @@
             "@component/*": [
                 "src/component/*"
             ],
-            "@Button/*": [
-                "src/component/Button/*"
-            ],
             "@Pages/*": [
                 "src/Pages/*"
+            ],
+            "@new-assetes/*": [
+                "src/new-assetes/*"
+            ],
+            "@new-assets/*": [
+                "src/new-assets/*"
+            ],
+            "@svgs/*": [
+                "src/component/svgs/*"
+            ],
+            "@svg/*": [
+                "src/component/svg/*"
             ]
         },
         "plugins": [
