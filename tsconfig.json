@@ -48,6 +48,12 @@
             ],
             "@svg/*": [
                 "src/component/svg/*"
+            ],
+            "@stories/*": [
+                "src/stories/*"
+            ],
+            "@types/*": [
+                "src/types/*"
             ]
         },
         "plugins": [
