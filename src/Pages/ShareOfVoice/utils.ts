@@ -60,34 +60,41 @@ export function getTableData(
 	monthlyValues: ShareOfVoiceType[],
 	tier?: string,
 ) {
-	const weeklyOutput = weeklyValues.reduce((acc, curr, i) => {
-		keys.forEach(metric => {
-			acc[metric] = acc[metric] || {};
-			acc[metric][`week_${i}`] = curr[metric] || '';
-		});
-		return acc;
-	}, {} as Merged);
+	const weeklyOutput = weeklyValues.reduce<Partial<Merged>>(
+		(acc, curr, i) => {
+			keys.forEach(metric => {
+				const x = (acc[metric] = acc[metric] ?? {});
+				x[`week_${i}`] = curr[metric] ?? '';
+			});
+			return acc;
+		},
+		{},
+	);
 
 	// console.log(`🚀 ~ weeklyOutput ~ weeklyOutput:`, weeklyOutput);
 
-	const monthlyOutput = monthlyValues.reduce((acc, curr, i) => {
-		keys.forEach(metric => {
-			acc[metric] = acc[metric] || {};
-			acc[metric][`month_${i}`] = curr[metric] || '';
-		});
-		return acc;
-	}, {} as Merged);
+	const monthlyOutput = monthlyValues.reduce<Partial<Merged>>(
+		(acc, curr, i) => {
+			keys.forEach(metric => {
+				const x = (acc[metric] = acc[metric] ?? {});
+				x[`month_${i}`] = curr[metric] ?? '';
+			});
+			return acc;
+		},
+		{},
+	);
 
 	// console.log(`🚀 ~ monthlyOutput ~ monthlyOutput:`, monthlyOutput);
 
 	const mergedData = keys.flatMap(metric => {
 		if (!weeklyOutput[metric] && !monthlyOutput[metric]) return [];
+
 		const [wMin = -Infinity, wMax = Infinity] = extent(
-			Object.values(weeklyOutput[metric] || {}),
+			Object.values(weeklyOutput[metric] ?? {}),
 		);
 
 		const [mMin = -Infinity, mMax = Infinity] = extent(
-			Object.values(monthlyOutput[metric] || {}),
+			Object.values(monthlyOutput[metric] ?? {}),
 		);
 
 		// console.log(`🚀 ~ mergedData ~ w:`, w);

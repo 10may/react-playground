@@ -72,7 +72,7 @@ const variants = {
 export interface ButtonProps
 	extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	size: 'regular' | 'small';
-	variant: 'primary' | 'secondary' | 'subtle' | 'ghost';
+	variant: 'ghost' | 'primary' | 'secondary' | 'subtle';
 }
 
 export const Button: React.FC<ButtonProps> = forwardRef<

@@ -1,4 +1,4 @@
-import { ShareOfVoiceType, TieredData } from './utils';
+import { type ShareOfVoiceType, type TieredData } from './utils';
 
 export const WEEKLY_TOTALS: ShareOfVoiceType[] = [
 	{

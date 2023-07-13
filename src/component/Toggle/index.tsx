@@ -1,12 +1,12 @@
 import { forwardRef } from 'react';
 import styled from 'styled-components';
 
-type ToggleProps = {
+type ToggleProps = Omit<JSX.IntrinsicElements['input'], 'ref' | 'type'> & {
 	id?: string;
 	bg?: string;
 	width?: number;
 	height?: number;
-} & Omit<JSX.IntrinsicElements['input'], 'ref' | 'type'>;
+};
 
 export const Toggle = forwardRef<
 	HTMLInputElement,

@@ -1,5 +1,5 @@
 import {
-	ColumnDef,
+	type ColumnDef,
 	createColumnHelper,
 	flexRender,
 	getCoreRowModel,
@@ -9,7 +9,7 @@ import {
 } from '@tanstack/react-table';
 import { useEffect, useMemo, useReducer, useRef, useState } from 'react';
 
-import { makeData, Person } from './makeData';
+import { makeData, type Person } from './makeData';
 
 const ch = createColumnHelper<Person>();
 
@@ -96,7 +96,9 @@ export function RowSelectionTable() {
 	);
 
 	const [data, setData] = useState(() => makeData(100000));
-	const refreshData = () => setData(() => makeData(100000));
+	const refreshData = () => {
+		setData(() => makeData(100000));
+	};
 
 	const table = useReactTable({
 		data,
@@ -117,8 +119,10 @@ export function RowSelectionTable() {
 		<div>
 			<div>
 				<input
-					value={globalFilter ?? ''}
-					onChange={e => setGlobalFilter(e.target.value)}
+					value={globalFilter}
+					onChange={e => {
+						setGlobalFilter(e.target.value);
+					}}
 					placeholder='Search all columns...'
 				/>
 			</div>
@@ -189,28 +193,36 @@ export function RowSelectionTable() {
 			<div className='flex items-center gap-2'>
 				<button
 					className='rounded border p-1'
-					onClick={() => table.setPageIndex(0)}
+					onClick={() => {
+						table.setPageIndex(0);
+					}}
 					disabled={!table.getCanPreviousPage()}
 				>
 					{'<<'}
 				</button>
 				<button
 					className='rounded border p-1'
-					onClick={() => table.previousPage()}
+					onClick={() => {
+						table.previousPage();
+					}}
 					disabled={!table.getCanPreviousPage()}
 				>
 					{'<'}
 				</button>
 				<button
 					className='rounded border p-1'
-					onClick={() => table.nextPage()}
+					onClick={() => {
+						table.nextPage();
+					}}
 					disabled={!table.getCanNextPage()}
 				>
 					{'>'}
 				</button>
 				<button
 					className='rounded border p-1'
-					onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+					onClick={() => {
+						table.setPageIndex(table.getPageCount() - 1);
+					}}
 					disabled={!table.getCanNextPage()}
 				>
 					{'>>'}
@@ -259,7 +271,9 @@ export function RowSelectionTable() {
 			<div>
 				<button
 					className='mb-2 rounded border p-2'
-					onClick={() => rerender()}
+					onClick={() => {
+						rerender();
+					}}
 				>
 					Force Rerender
 				</button>
@@ -267,7 +281,9 @@ export function RowSelectionTable() {
 			<div>
 				<button
 					className='mb-2 rounded border p-2'
-					onClick={() => refreshData()}
+					onClick={() => {
+						refreshData();
+					}}
 				>
 					Refresh Data
 				</button>
@@ -275,7 +291,9 @@ export function RowSelectionTable() {
 			<div>
 				<button
 					className='mb-2 rounded border p-2'
-					onClick={() => console.info('rowSelection', rowSelection)}
+					onClick={() => {
+						console.info('rowSelection', rowSelection);
+					}}
 				>
 					Log `rowSelection` state
 				</button>
@@ -283,12 +301,12 @@ export function RowSelectionTable() {
 			<div>
 				<button
 					className='mb-2 rounded border p-2'
-					onClick={() =>
+					onClick={() => {
 						console.info(
 							'table.getSelectedFlatRows()',
 							table.getSelectedRowModel().flatRows,
-						)
-					}
+						);
+					}}
 				>
 					Log table.getSelectedFlatRows()
 				</button>
@@ -301,10 +319,11 @@ function IndeterminateCheckbox({
 	indeterminate,
 	className = '',
 	...rest
-}: { indeterminate?: boolean } & React.HTMLProps<HTMLInputElement>) {
-	const ref = useRef<HTMLInputElement>(null!);
+}: React.HTMLProps<HTMLInputElement> & { indeterminate?: boolean }) {
+	const ref = useRef<HTMLInputElement>(null);
 
 	useEffect(() => {
+		if (!ref.current) return;
 		if (typeof indeterminate === 'boolean') {
 			ref.current.indeterminate = !rest.checked && indeterminate;
 		}

@@ -1,79 +1,49 @@
 {
-    "compilerOptions": {
-        "target": "ESNext",
-        "useDefineForClassFields": true,
-        "lib": [
-            "DOM",
-            "DOM.Iterable",
-            "ESNext"
-        ],
-        "allowJs": false,
-        "skipLibCheck": true,
-        "esModuleInterop": false,
-        "allowSyntheticDefaultImports": true,
-        "strict": true,
-        "forceConsistentCasingInFileNames": true,
-        "module": "ESNext",
-        "moduleResolution": "Node",
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "noEmit": true,
-        "jsx": "react-jsx",
-        // custom
-        "baseUrl": ".",
-        "types": [
-            "vite/client"
-        ],
-        "paths": {
-            "@assets/*": [
-                "src/assets/*"
-            ],
-            "@/*": [
-                "src/*"
-            ],
-            "@component/*": [
-                "src/component/*"
-            ],
-            "@Pages/*": [
-                "src/Pages/*"
-            ],
-            "@new-assetes/*": [
-                "src/new-assetes/*"
-            ],
-            "@new-assets/*": [
-                "src/new-assets/*"
-            ],
-            "@svgs/*": [
-                "src/component/svgs/*"
-            ],
-            "@svg/*": [
-                "src/component/svg/*"
-            ],
-            "@stories/*": [
-                "src/stories/*"
-            ],
-            "@types/*": [
-                "src/types/*"
-            ]
-        },
-        "plugins": [
-            {
-                "name": "@styled/typescript-styled-plugin"
-            }
-        ]
-    },
-    "include": [
-        "src",
-        ".eslintrc.cjs",
-        "postcss.config.cjs",
-        "vite.config.ts"
-    ],
-    "exclude": [
-        "node_modules"
-    ],
-    "references": [
-        {
-            "path": "./tsconfig.node.json"
-        }
-    ]
+	"compilerOptions": {
+		"target": "ESNext",
+		"useDefineForClassFields": true,
+		"lib": ["DOM", "DOM.Iterable", "ESNext"],
+		"allowJs": false,
+		"skipLibCheck": true,
+		"esModuleInterop": false,
+		"allowSyntheticDefaultImports": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"module": "ESNext",
+		"moduleResolution": "Node",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"noEmit": true,
+		"jsx": "react-jsx",
+		// custom
+		"baseUrl": ".",
+		"types": ["vite/client"],
+		"plugins": [
+			{
+				"name": "@styled/typescript-styled-plugin"
+			}
+		],
+		"paths": {
+			"@Pages/*": ["src/Pages/*"],
+			"@assets/*": ["src/assets/*"],
+			"@component/*": ["src/component/*"],
+			"@stories/*": ["src/stories/*"],
+			"@types/*": ["src/types/*"],
+			"@/*": ["src/*"]
+		}
+	},
+	"include": [
+		"src",
+		".eslintrc.cjs",
+		"postcss.config.cjs",
+		"vite.config.ts",
+		"tailwind.config.cjs",
+		"svgr-template.cjs"
+	],
+	"exclude": ["node_modules"],
+	"references": [
+		{
+			"path": "./tsconfig.node.json"
+		}
+	]
 }

@@ -10,16 +10,12 @@ import { useMemo } from 'react';
 import styled from 'styled-components';
 
 import { TieredMonthlyData, TieredWeeklyData } from './data';
-import { getTableData, ShareOfVoiceType } from './utils';
+import { getTableData, type ShareOfVoiceType } from './utils';
 
 type KeysSOV = Exclude<
 	keyof ShareOfVoiceType,
 	'month_start_date' | 'week_start_date'
 >;
-
-type Merged = {
-	[value in KeysSOV]: Record<string, string>;
-};
 
 type TableData = {
 	tier: string;
@@ -39,14 +35,6 @@ type TableData = {
 	mMin: number;
 	mMax: number;
 };
-
-const keys: KeysSOV[] = [
-	'clicks_share',
-	'purchases_brand_count',
-	'purchases_total_count',
-	'sales_share',
-	'search_query_volume',
-];
 
 const TITLES = {
 	tier: { title: 'Tier', formatter: (v: string) => v },
@@ -379,7 +367,6 @@ export function ShareOfVoice() {
 									</td>
 								)}
 								{row.getVisibleCells().map(cell => {
-									const val = cell.getValue();
 									return (
 										<td
 											key={cell.id}
@@ -441,24 +428,3 @@ const Td = styled.div`
 	padding: 8px;
 	text-align: left;
 `;
-
-function getTextColor(rgbString: string) {
-	const rgbArray = rgbString.substring(4, rgbString.length - 1).split(',');
-
-	const r = parseInt(rgbArray[0].trim());
-	const g = parseInt(rgbArray[1].trim());
-	const b = parseInt(rgbArray[2].trim());
-
-	const brightness = Math.round((r * 299 + g * 587 + b * 114) / 1000);
-
-	// Set the text color based on the brightness value
-	if (brightness > 125) {
-		// Use black text for light backgrounds
-		return '#000000';
-	}
-
-	// Use white text for dark backgrounds
-	return '#ffffff';
-}
-
-// CustomerAnalytics

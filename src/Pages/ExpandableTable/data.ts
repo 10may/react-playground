@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import { Category } from './type';
+import { type Category } from './type';
 
 const range = (len: number) => {
 	return Array.from(Array(len).keys());

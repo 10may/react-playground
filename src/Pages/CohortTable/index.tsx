@@ -1,17 +1,17 @@
 import { theme } from '@/theme';
 import {
-	ColumnDef,
+	type ColumnDef,
 	createColumnHelper,
 	flexRender,
 	getCoreRowModel,
-	RowData,
+	type RowData,
 	useReactTable,
 } from '@tanstack/react-table';
 import { interpolateRgb, piecewise, scaleSequentialLog } from 'd3';
 import { useMemo } from 'react';
 import styled from 'styled-components';
 
-import { Cohort, data, MONTHS } from './data';
+import { type Cohort, data, MONTHS } from './data';
 
 declare module '@tanstack/react-table' {
 	interface TableMeta<TData extends RowData> {
@@ -83,8 +83,8 @@ const columns = [
 			cell: info => {
 				const val = info.getValue();
 
-				const min = info.table.options.meta?.min || -Infinity;
-				const max = info.table.options.meta?.max || Infinity;
+				const min = info.table.options.meta?.min ?? -Infinity;
+				const max = info.table.options.meta?.max ?? Infinity;
 
 				const colorScale = scale.domain([min, max]);
 				const bg = colorScale(val);
@@ -179,11 +179,10 @@ export interface CohortTableProps<T, U = unknown> {
 	columns: ColumnDef<T, U>[];
 }
 
-export function CohortTable<
-	T extends Record<string, unknown>,
-	U = unknown,
->({}: React.PropsWithChildren<CohortTableProps<T, U>>) {
-	const [min, max] = useMemo(() => getDomain(data), [data]);
+export function CohortTable<T extends Record<string, unknown>, U = unknown>(
+	_props: React.PropsWithChildren<CohortTableProps<T, U>>,
+) {
+	const [min, max] = useMemo(() => getDomain(data), []);
 
 	const table = useReactTable({
 		data: data,

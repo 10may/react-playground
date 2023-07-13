@@ -1,6 +1,6 @@
 import {
 	createColumnHelper,
-	ExpandedState,
+	type ExpandedState,
 	flexRender,
 	getCoreRowModel,
 	getExpandedRowModel,
@@ -11,7 +11,7 @@ import { useMemo, useRef, useState } from 'react';
 import { styled } from 'styled-components';
 
 import { makeExpandableTableData } from './data';
-import { Category } from './type';
+import { type Category } from './type';
 
 const columnHelper = createColumnHelper<Category>();
 
@@ -172,10 +172,10 @@ export const ExpandableTable = () => {
 	const totalSize = rowVirtualizer.getTotalSize();
 
 	const paddingTop =
-		virtualRows.length > 0 ? virtualRows?.[0]?.start || 0 : 0;
+		virtualRows.length > 0 ? virtualRows[0]?.start || 0 : 0;
 	const paddingBottom =
 		virtualRows.length > 0
-			? totalSize - (virtualRows?.[virtualRows.length - 1]?.end || 0)
+			? totalSize - (virtualRows[virtualRows.length - 1]?.end || 0)
 			: 0;
 
 	return (

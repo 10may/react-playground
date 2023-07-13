@@ -22,7 +22,7 @@ const Tabs: React.FC<TabsProps> & { Tab: typeof Tab } = ({
 	defaultActiveTab,
 }) => {
 	const [activeValue, setActiveValue] = useState<string | null>(
-		defaultActiveTab || null,
+		defaultActiveTab ?? null,
 	);
 	const handleOnClick = (event: React.MouseEvent<HTMLInputElement>) => {
 		setActiveValue(event.currentTarget.value);
@@ -50,9 +50,9 @@ const Tabs: React.FC<TabsProps> & { Tab: typeof Tab } = ({
 	);
 };
 
-type TabProps = {
+type TabProps = React.InputHTMLAttributes<HTMLInputElement> & {
 	children?: React.ReactNode;
-} & React.InputHTMLAttributes<HTMLInputElement>;
+};
 
 const Tab = forwardRef<HTMLInputElement, React.PropsWithChildren<TabProps>>(
 	({ children, ...rest }, ref) => {

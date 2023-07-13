@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { forwardRef, Ref, SVGProps } from 'react';
+import { forwardRef, type Ref, type SVGProps } from 'react';
 
 interface SVGRProps {
 	title?: string;
@@ -22,7 +21,6 @@ const SvgVite = (
 		width={31.88}
 		height={32}
 		aria-hidden='true'
-		className='vite_svg__iconify vite_svg__iconify--logos'
 		viewBox='0 0 256 257'
 		ref={ref}
 		aria-labelledby={titleId}

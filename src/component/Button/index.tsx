@@ -1,23 +1,30 @@
 import { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
-import { compose, layout, LayoutProps, space, SpaceProps } from 'styled-system';
+import {
+	compose,
+	layout,
+	type LayoutProps,
+	space,
+	type SpaceProps,
+} from 'styled-system';
 
 export interface ButtonProps
 	extends React.ButtonHTMLAttributes<HTMLButtonElement>,
 		Partial<StyledButtonProps> {}
 
-type StyledButtonProps = {
-	/**
-	 * The size of the button.
-	 */
-	s: 'regular' | 'small';
+type StyledButtonProps = LayoutProps &
+	SpaceProps & {
+		/**
+		 * The size of the button.
+		 */
+		s: 'regular' | 'small';
 
-	/**
-	 * The variant of the button.
-	 */
-	v: 'primary' | 'secondary' | 'subtle' | 'ghost';
+		/**
+		 * The variant of the button.
+		 */
+		v: 'ghost' | 'primary' | 'secondary' | 'subtle';
 
-	/**
+		/**
 	 * An optional array of paths to images to be used as the button's background.
 	 * The first element is the path to the default image,
 	 * the second is the path to the on hover image,
@@ -34,9 +41,8 @@ type StyledButtonProps = {
 	 *
 	 * ]
 	 */
-	src?: [string, string?, string?];
-} & SpaceProps &
-	LayoutProps;
+		src?: [string, string?, string?];
+	};
 
 export const Button: React.FC<ButtonProps> = forwardRef<
 	HTMLButtonElement,
@@ -165,11 +171,11 @@ export const StyledButton = styled.button<StyledButtonProps>`
 				}
 
 				&:hover img {
-					content: url(${src[1] || src[0]});
+					content: url(${src[1] ?? src[0]});
 				}
 
 				&:disabled img {
-					content: url(${src[2] || src[0]});
+					content: url(${src[2] ?? src[0]});
 				}
 			`
 		);

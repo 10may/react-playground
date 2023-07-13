@@ -1,4 +1,4 @@
-import { forwardRef, Ref, SVGProps } from 'react';
+import { forwardRef, type Ref, type SVGProps } from 'react';
 
 interface SVGRProps {
 	title?: string;
@@ -21,7 +21,6 @@ const SvgReact = (
 		width={35.93}
 		height={32}
 		aria-hidden='true'
-		className='react_svg__iconify react_svg__iconify--logos'
 		viewBox='0 0 256 228'
 		ref={ref}
 		aria-labelledby={titleId}

@@ -6,15 +6,21 @@ module.exports = {
 	},
 	extends: [
 		'eslint:recommended',
+
 		'plugin:react/recommended',
 		'plugin:react/jsx-runtime',
 		'plugin:react-hooks/recommended',
-		'plugin:@typescript-eslint/recommended',
-		'plugin:@typescript-eslint/recommended-requiring-type-checking',
+
+		// 'plugin:@typescript-eslint/recommended-type-checked',
+		'plugin:@typescript-eslint/strict-type-checked',
+		'plugin:@typescript-eslint/stylistic-type-checked',
+
 		'plugin:import/recommended',
 		'plugin:import/typescript',
+
 		'plugin:tailwindcss/recommended',
-		'plugin:prettier/recommended',
+
+		'prettier',
 	],
 	overrides: [],
 	parser: '@typescript-eslint/parser',
@@ -30,8 +36,27 @@ module.exports = {
 		'react/jsx-key': 'warn',
 		'react/prop-types': 'off',
 
-		// prettier
-		'prettier/prettier': 'warn',
+		// TypeScript
+		'@typescript-eslint/consistent-type-imports': [
+			'warn',
+			{
+				fixStyle: 'inline-type-imports',
+			},
+		],
+		'@typescript-eslint/consistent-type-exports': 'warn',
+		'@typescript-eslint/consistent-type-definitions': 'off',
+		'@typescript-eslint/no-explicit-any': 'warn',
+		'@typescript-eslint/sort-type-constituents': 'warn',
+		// '@typescript-eslint/no-floating-promises': 'off',
+		// '@typescript-eslint/no-misused-promises': [
+		// 	'error',
+		// 	{
+		// 		checksVoidReturn: {
+		// 			arguments: false,
+		// 			attributes: false,
+		// 		},
+		// 	},
+		// ],
 
 		// turn on errors for missing imports
 		'import/default': 'warn',
