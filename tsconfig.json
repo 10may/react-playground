@@ -2,7 +2,11 @@
 	"compilerOptions": {
 		"target": "ESNext",
 		"useDefineForClassFields": true,
-		"lib": ["DOM", "DOM.Iterable", "ESNext"],
+		"lib": [
+			"DOM",
+			"DOM.Iterable",
+			"ESNext"
+		],
 		"allowJs": false,
 		"skipLibCheck": true,
 		"esModuleInterop": false,
@@ -17,19 +21,39 @@
 		"jsx": "react-jsx",
 		// custom
 		"baseUrl": ".",
-		"types": ["vite/client"],
+		"types": [
+			"vite/client"
+		],
 		"plugins": [
 			{
 				"name": "@styled/typescript-styled-plugin"
 			}
 		],
 		"paths": {
-			"@Pages/*": ["src/Pages/*"],
-			"@assets/*": ["src/assets/*"],
-			"@component/*": ["src/component/*"],
-			"@stories/*": ["src/stories/*"],
-			"@types/*": ["src/types/*"],
-			"@/*": ["src/*"]
+			"@Pages/*": [
+				"src/Pages/*"
+			],
+			"@assets/*": [
+				"src/assets/*"
+			],
+			"@component/*": [
+				"src/component/*"
+			],
+			"@stories/*": [
+				"src/stories/*"
+			],
+			"@types/*": [
+				"src/types/*"
+			],
+			"@/*": [
+				"src/*"
+			],
+			"@Components/*": [
+				"src/Components/*"
+			],
+			"@SVGs/*": [
+				"src/Components/SVGs/*"
+			]
 		}
 	},
 	"include": [
@@ -40,7 +64,9 @@
 		"tailwind.config.cjs",
 		"svgr-template.cjs"
 	],
-	"exclude": ["node_modules"],
+	"exclude": [
+		"node_modules"
+	],
 	"references": [
 		{
 			"path": "./tsconfig.node.json"
