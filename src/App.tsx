@@ -1,5 +1,4 @@
-import { Button } from 'dh-components';
-import 'dh-components/dist/style.css';
+
 import { ThemeProvider } from 'styled-components';
 
 import { theme } from './theme';
@@ -9,7 +8,6 @@ function App() {
 		<ThemeProvider theme={theme}>
 			<div className='flex h-screen items-center justify-center'>
 				React Playground
-				<Button>My Button</Button>
 			</div>
 		</ThemeProvider>
 	);
