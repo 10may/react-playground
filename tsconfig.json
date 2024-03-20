@@ -5,7 +5,6 @@
         "lib": ["ES2020", "DOM", "DOM.Iterable"],
         "module": "ESNext",
         "skipLibCheck": true,
-
         /* Bundler mode */
         "moduleResolution": "bundler",
         "allowImportingTsExtensions": true,
@@ -13,12 +12,17 @@
         "isolatedModules": true,
         "noEmit": true,
         "jsx": "react-jsx",
-
         /* Linting */
         "strict": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "noFallthroughCasesInSwitch": true
+        "noFallthroughCasesInSwitch": true,
+        "baseUrl": ".",
+        "paths": {
+            "~assets/*": ["src/assets/*"],
+            "~stories/*": ["src/stories/*"],
+            "~/*": ["src/*"]
+        }
     },
     "include": [
         "src",
@@ -28,5 +32,9 @@
         "tailwind.config.js",
         "template.cjs"
     ],
-    "references": [{ "path": "./tsconfig.node.json" }]
+    "references": [
+        {
+            "path": "./tsconfig.node.json"
+        }
+    ]
 }
