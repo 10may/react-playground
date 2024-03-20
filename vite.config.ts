@@ -1,7 +1,6 @@
 import react from '@vitejs/plugin-react-swc';
+import path from 'path';
 import { defineConfig } from 'vite';
-
-// import { ViteAliases } from 'vite-aliases';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -9,4 +8,10 @@ export default defineConfig({
         react(),
         // ViteAliases()
     ],
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, './src'),
+            '~': path.resolve(__dirname, './src'),
+        },
+    },
 });
